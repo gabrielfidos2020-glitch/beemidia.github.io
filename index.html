@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeeMedia - Sistemas de Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --y: #FFC107;
+  --d: #1A1A1A;
+  --w: #FFFFFF;
+  --g: #F3F4F6;
+  --text: #4B5563;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 32px;
+  --space-lg: 64px;
+  --space-xl: 96px;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Inter', sans-serif; 
+}
+
+body { 
+  background: var(--w); 
+  color: var(--d); 
+  overflow-x: hidden; 
+  line-height: 1.6; 
+  -webkit-font-smoothing: antialiased;
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+section { 
+  padding: var(--space-lg) 0; 
+  position: relative; 
+}
+
+/* Typography */
+h1, h2, h3, h4 { 
+  line-height: 1.2; 
+  font-weight: 800; 
+  letter-spacing: -0.02em; 
+}
+h1 { font-size: 2.25rem; margin-bottom: 1.25rem; }
+h2 { font-size: 1.75rem; margin-bottom: 1.5rem; text-align: center; }
+h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+p { color: var(--text); margin-bottom: 1rem; }
+
+.text-y { color: var(--y); }
+.section-subtitle { 
+  text-align: center; 
+  font-size: 1.125rem; 
+  margin-top: -1rem; 
+  margin-bottom: 2.5rem; 
+  font-weight: 500; 
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+/* Buttons */
+.btn { 
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem; 
+  border-radius: 999px; 
+  font-weight: 700; 
+  text-decoration: none; 
+  text-align: center; 
+  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1); 
+  border: none; 
+  cursor: pointer; 
+  font-size: 1rem; 
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255,193,7,0.5);
+  transform: translateY(-2px);
+}
+.btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.btn:active {
+  transform: translateY(-1px) scale(0.98);
+  opacity: 0.85;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 150%; height: 150%;
+  background: rgba(255,255,255,0.2);
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  transition: transform 0.5s ease;
+}
+.btn:active::after {
+  transform: translate(-50%, -50%) scale(1);
+  transition: 0s;
+}
+
+.btn-y { 
+  background: var(--y); 
+  color: var(--d) !important; 
+  box-shadow: 0 10px 30px rgba(255,193,7,0.3); 
+  border: 2px solid transparent;
+}
+.btn-y:hover { 
+  background: #ffca28;
+  box-shadow: 0 15px 40px rgba(255,193,7,0.4); 
+}
+.btn-d { 
+  background: var(--d); 
+  color: var(--w) !important; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+}
+.btn-d:hover { 
+  background: #333333; 
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+}
+
+.btn-arrow {
+  margin-left: 8px;
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+.btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Navbar */
+nav { 
+  position: fixed; 
+  top: 0; 
+  width: 100%; 
+  background: rgba(255,255,255,0.98); 
+  z-index: 100; 
+  padding: 10px 0; 
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+}
+.nav-c { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.logo img {
+  height: 125px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .logo img {
+    height: 90px;
+  }
+}
+
+.quiz-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.quiz-result button, .quiz-result .btn {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto; /* Ensure it doesn't stay 100% if it was */
+  min-width: 280px; /* Good minimum for buttons */
+}
+
+.nav-links { 
+  display: none; 
+}
+.nav-links a {
+  color: #333333;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover {
+  color: var(--y);
+}
+.nav-links a.btn {
+  color: var(--d) !important;
+}
+.nav-links a.btn:hover {
+  color: var(--d) !important;
+}
+.menu-btn { 
+  display: block; 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  padding: 0.5rem; 
+  z-index: 101; 
+}
+.menu-btn span { 
+  display: block; 
+  width: 24px; 
+  height: 2px; 
+  background: var(--d); 
+  margin: 5px 0; 
+  transition: 0.3s; 
+}
+.menu-btn.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 5px); }
+.menu-btn.open span:nth-child(2) { opacity: 0; }
+.menu-btn.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -5px); }
+
+/* Mobile Menu */
+.mobile-menu { 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100vh; 
+  background: var(--w); 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 2rem; 
+  transform: translateY(-100%); 
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  z-index: 99; 
+}
+.mobile-menu.active { 
+  transform: translateY(0); 
+}
+.mobile-menu a { 
+  font-size: 1.25rem; 
+  font-weight: 600; 
+  color: var(--d); 
+  text-decoration: none; 
+}
+
+/* Hero */
+.hero { 
+  padding-top: 110px; 
+  padding-bottom: var(--space-lg);
+  text-align: center; 
+  background: radial-gradient(circle at 50% 20%, rgba(255,200,0,0.08), transparent 60%), #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  top: -50px; left: 0; right: 0; bottom: -50px;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='100' viewBox='0 0 60 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFC107' fill-opacity='0.04' fill-rule='evenodd'%3E%3Cpath d='M30 100L0 85V55l30-15 30 15v30L30 100zm0-2L2 83.8v-27.6L30 58l28-14.2v27.6L30 98zM15 75l-15-7.5V37.5L15 30l15 7.5v30L15 75zm0-2L2 65.8V39.2L15 32l13 6.5v26.6L15 73zM45 75l-15-7.5V37.5L45 30l15 7.5v30L45 75zm0-2L32 65.8V39.2L45 32l13 6.5v26.6L45 73zM30 50L0 35V5l30-15 30 15v30L30 50zm0-2L2 33.8V6.2L30-8l28 14.2v27.6L30 48z'/%3E%3C/g%3E%3C/svg%3E");
+  z-index: 0;
+  will-change: transform;
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-title {
+  display: inline-block;
+  color: var(--d);
+  font-weight: 900;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  margin-bottom: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+.hero-subtitle { 
+  max-width: 600px; 
+  margin-inline: auto; 
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.hero-highlight {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 800;
+  color: var(--d);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.hero-desc { 
+  font-size: 1.1rem; 
+  max-width: 500px; 
+  margin-inline: auto; 
+  margin-bottom: 3rem; 
+  color: var(--text);
+  opacity: 0.8;
+}
+@media(min-width: 768px) {
+  .hero { padding-top: 160px; padding-bottom: var(--space-xl); }
+  .hero-title { font-size: 5rem; margin-bottom: 2.5rem; }
+  .hero-subtitle { font-size: 1.75rem; margin-bottom: 1rem; max-width: 900px; }
+  .hero-highlight { font-size: 2.75rem; margin-bottom: 2rem; }
+  .hero-desc { font-size: 1.25rem; max-width: 700px; margin-bottom: 4rem; }
+}
+.trust-text {
+  font-size: 0.85rem;
+  color: #374151; /* Darker for better contrast */
+  margin-top: 1rem;
+  font-weight: 500;
+}
+.stats { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1rem; 
+  margin-top: 3rem; 
+}
+.stat h3 { 
+  color: var(--y); 
+  font-size: 1.5rem; 
+  margin-bottom: 0.25rem; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media(min-width: 768px) {
+  .stat h3 { font-size: 2.25rem; }
+}
+.stat p { 
+  font-weight: 600; 
+  text-transform: uppercase; 
+  font-size: 0.75rem; 
+  letter-spacing: 1px; 
+  margin: 0; 
+}
+
+/* Cards */
+.cards { 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  margin-top: 2rem; 
+}
+.card { 
+  background: rgba(255,255,255,0.7); 
+  backdrop-filter: blur(6px);
+  padding: 28px 24px; 
+  border-radius: 16px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+  border: 1px solid rgba(255,193,7,0.15); 
+  text-align: center; 
+  transition: all 0.25s ease; 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+.card h3 {
+  margin-bottom: 10px;
+}
+.card p {
+  line-height: 1.6;
+  word-break: break-word;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+#problema .card:hover {
+  background: var(--y);
+  border-color: var(--y);
+}
+.icon-large { 
+  font-size: 2.5rem; 
+  margin-bottom: 1rem; 
+  display: block; 
+}
+
+/* Hive */
+.hive { 
+  background: #FAFAFA; 
+  color: var(--d); 
+  text-align: center; 
+}
+.hive h2 { color: var(--d); }
+.hex-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 3rem auto 0;
+}
+.hex-grid { 
+  display: flex; 
+  flex-direction: column;
+  gap: 28px; 
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hex-wrap {
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.06));
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  max-width: 200px;
+}
+@media(min-width: 768px) {
+  .hex-wrap { max-width: 280px; }
+}
+.hex-wrap:hover {
+  filter: drop-shadow(0 12px 24px rgba(255,193,7,0.25));
+  transform: translateY(-8px);
+}
+.hex-inner {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,193,7,0.15);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  aspect-ratio: 1 / 1.15;
+  padding: 28px 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+@media(min-width: 768px) {
+  .hex-inner { padding: 28px 24px; }
+}
+.hex-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--y);
+  margin-bottom: 1rem;
+}
+.hex-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.hex-inner h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--d);
+}
+@media(min-width: 768px) {
+  .hex-inner h3 { font-size: 1.25rem; }
+}
+.hex-inner p {
+  font-size: 0.8rem;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.4;
+}
+@media(min-width: 768px) {
+  .hex-inner p { font-size: 0.95rem; }
+}
+
+/* Como Funciona */
+.how-it-works { background: var(--w); text-align: center; }
+.process-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.process-step {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,193,7,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  position: relative;
+}
+.process-num {
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 3rem;
+  background: var(--y);
+  color: var(--d);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 10px rgba(255,193,7,0.3);
+}
+.process-step h3 { margin-top: 1rem; font-size: 1.25rem; }
+.process-step p { margin: 0; font-size: 1rem; }
+
+/* Services */
+.services { background: var(--g); }
+.services .card { 
+  text-align: center; 
+  padding: 1.5rem; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+.services .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(255,193,7,0.15);
+}
+.service-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255,193,7,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--y);
+  transition: transform 0.3s ease;
+}
+.services .card:hover .service-icon {
+  transform: scale(1.1);
+  background: var(--y);
+  color: var(--d);
+}
+.service-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.services .card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.services .card p { margin: 0; font-size: 1rem; }
+
+/* Diagnosis Quiz */
+.social-proof-text {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.quiz-header-progress {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.quiz-progress-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.quiz-progress-track {
+  width: 100%;
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.quiz-progress-fill {
+  height: 100%;
+  background: var(--y);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+.quiz { 
+  background: transparent; 
+  padding: 2rem 1.5rem; 
+  border-radius: 1rem; 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
+  border: 1px solid #f0f0f0; 
+  max-width: 600px;
+  margin: 0 auto;
+}
+#diagnostico {
+  background: linear-gradient(
+    180deg,
+    rgba(255,193,7,0.08) 0%,
+    rgba(255,193,7,0.03) 40%,
+    #ffffff 100%
+  );
+}
+.quiz-step { display: none; animation: fadeIn 0.4s ease; }
+.quiz-step.active { display: block; }
+.quiz-step h3 { margin-bottom: 1.5rem; text-align: center; font-size: 1.25rem; }
+.quiz-options { display: flex; flex-direction: column; gap: 0.75rem; }
+.quiz-opt {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--d);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.quiz-opt:hover, .quiz-opt.selected {
+  border-color: var(--y);
+  background: rgba(255,193,7,0.05);
+  transform: translateY(-2px);
+}
+.q-group { margin-bottom: 1.25rem; text-align: center; }
+.q-group label { 
+  display: block; 
+  margin-bottom: 0.5rem; 
+  font-weight: 600; 
+  color: var(--d); 
+  font-size: 0.95rem;
+  text-align: center;
+}
+.q-group input { 
+  width: 100%; 
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0.875rem; 
+  border-radius: 0.5rem; 
+  border: 1px solid #ddd; 
+  font-family: inherit; 
+  font-size: 1rem; 
+  background: #fafafa; 
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: center;
+}
+.q-group input:focus { 
+  outline: none; 
+  border-color: var(--y); 
+  background: var(--w); 
+}
+.btn-submit {
+  width: 100%;
+  font-size: 1.125rem;
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+.privacy-text {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6B7280; /* Darker gray for better contrast */
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.quiz-result { text-align: center; }
+.quiz-result h3 { color: var(--y); margin-bottom: 1rem; }
+.quiz-loading { text-align: center; }
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  margin: 1.5rem 0 1rem;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--y);
+  border-radius: 4px;
+  transition: width 0.1s linear;
+}
+.progress-text {
+  font-weight: 600;
+  color: var(--d);
+  font-size: 1.125rem;
+}
+.btn-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .6s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Authority Section */
+.authority { 
+  background: var(--w); 
+  text-align: center; 
+  padding: 3rem 0 1rem; 
+  border-top: 1px solid #f0f0f0;
+}
+.auth-grid { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 1.5rem; 
+}
+.auth-item { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  gap: 0.75rem; 
+}
+.auth-icon { 
+  color: var(--y);
+}
+.auth-item h4 { 
+  font-size: 1rem; 
+  font-weight: 700; 
+  color: var(--d); 
+  margin: 0;
+}
+
+/* CTA */
+.cta { 
+  background: var(--y); 
+  text-align: center; 
+  padding: var(--space-xl) 0; 
+}
+.cta h2 { 
+  font-size: 1.75rem; 
+  margin-bottom: 1.5rem; 
+  color: var(--d); 
+}
+
+/* Floating Button */
+.float-btn { 
+  position: fixed; 
+  bottom: 1rem; 
+  right: 1rem; 
+  z-index: 90; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.float-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Animations */
+.fade-in-up { 
+  opacity: 0; 
+  transform: translateY(20px); 
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+}
+.fade-in-up.visible { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+
+
+/* Desktop & Tablet Scaling */
+@media(min-width: 768px) {
+  section { padding: var(--space-lg) 0; }
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.5rem; margin-bottom: 3rem; }
+  .btn { width: auto; padding: 1rem 2.5rem; font-size: 1.125rem; }
+  .logo img, .logo svg { height: 125px; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .menu-btn { display: none; }
+  .mobile-menu { display: none !important; }
+  .hero { padding-top: 160px; padding-bottom: var(--space-xl); }
+  /* Removed hero-label and hero h1/p from media query as they are replaced by hero-title/subtitle/desc */
+  .stats { display: flex; flex-direction: row; justify-content: center; gap: 4rem; }
+  .cards { gap: 28px; justify-content: center; }
+  .card { padding: 28px 24px; }
+  .hex-wrapper { margin-top: 4rem; }
+  .hex-grid { flex-direction: row; justify-content: center; gap: 28px; max-width: 1200px; margin: 0 auto; }
+  .hex-wrap { flex: 1; max-width: 280px; }
+  
+  .process-grid { flex-direction: row; gap: 2rem; justify-content: center; }
+  .process-step { flex: 1; padding: 2.5rem; }
+  
+  .services .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; justify-content: center; max-width: 1000px; margin: 0 auto; }
+  .services .card { width: 100%; padding: 28px 24px; }
+  
+  .quiz { padding: 3rem; }
+  .authority { padding: 4rem 0 2rem; }
+  .auth-grid { flex-direction: row; justify-content: center; gap: 4rem; }
+  .cta { padding: var(--space-xl) 0; }
+  .cta h2 { font-size: 2.5rem; max-width: 800px; margin-inline: auto; }
+  .float-btn { bottom: 2rem; right: 2rem; padding: 1rem 1.5rem; font-size: 1rem; }
+  #bee-container { width: 80px; height: 80px; display: none; }
+}
+
+@media (max-width: 767px) {
+  section { padding: var(--space-md) 0; }
+  
+  .container {
+    width: 94%;
+    padding: 0;
+  }
+
+  .hero {
+    padding-top: 130px;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.9rem;
+    line-height: 1.1;
+    max-width: 320px;
+    margin-inline: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    max-width: 320px;
+    margin-inline: auto;
+    margin-bottom: 1rem;
+  }
+
+  .hero-highlight {
+    font-size: 1.3rem;
+    max-width: 320px;
+    margin-inline: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-desc {
+    font-size: 0.9rem;
+    max-width: 320px;
+    margin-inline: auto;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero .btn {
+    width: auto;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  h2 { font-size: 1.4rem; margin-bottom: 2rem; }
+
+  .stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .stat h3 {
+    font-size: 1.1rem;
+  }
+
+  .stat p {
+    font-size: 0.6rem;
+  }
+
+  .cards {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .card {
+    width: 33.33%;
+    padding: 1rem 0.5rem;
+    margin: 0;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .card h3 { font-size: 0.75rem; line-height: 1.2; }
+  .icon-large { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+  .hex-grid {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  .hex-wrap {
+    width: 25%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .hex-inner {
+    padding: 0.75rem 0.25rem;
+  }
+
+  .hex-inner h3 {
+    font-size: 0.65rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .hex-inner p {
+    font-size: 0.55rem;
+    line-height: 1.2;
+  }
+  
+  .hex-icon { width: 20px; height: 20px; margin-bottom: 0.4rem; }
+
+  .process-grid {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .process-step {
+    width: 33.33%;
+    padding: 1.25rem 0.4rem 0.75rem;
+    margin: 0;
+    min-height: auto;
+  }
+
+  .process-step h3 {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .process-step p {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+  
+  .process-num {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.9rem;
+    top: -0.875rem;
+  }
+
+  .services .cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .services .card {
+    width: calc(50% - 0.25rem);
+    padding: 1rem 0.75rem;
+  }
+  
+  .services .card h3 { font-size: 0.85rem; }
+  .services .card p { font-size: 0.7rem; }
+  .service-icon { width: 32px; height: 32px; margin-bottom: 0.75rem; }
+  .service-icon svg { width: 18px; height: 18px; }
+
+  .auth-grid {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .auth-item {
+    width: 33.33%;
+    gap: 0.3rem;
+  }
+  
+  .auth-item h4 { font-size: 0.65rem; }
+  .auth-icon svg { width: 16px; height: 16px; }
+
+  .quiz {
+    padding: 1.5rem 1rem;
+    width: 100%;
+  }
+
+  .quiz-step h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .quiz-opt {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  .q-group input { font-size: 0.9rem; padding: 0.75rem; }
+  
+  .cta h2 { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+
+
+<nav aria-label="Navegação principal">
+  <div class="container nav-c">
+    <div class="logo">
+      <img src="https://i.postimg.cc/tJQpK0sk/1000005461.png" alt="BeeMedia" referrerPolicy="no-referrer">
+    </div>
+    <div class="nav-links">
+      <a href="#problema" aria-label="Ir para seção Problema">Problema</a>
+      <a href="#solucao" aria-label="Ir para seção Solução">Solução</a>
+      <a href="#como-funciona" aria-label="Ir para seção Como Funciona">Como Funciona</a>
+      <a href="#servicos" aria-label="Ir para seção Serviços">Serviços</a>
+      <a href="#diagnostico" class="btn btn-y" style="padding:0.6rem 1.5rem; font-size:0.95rem;" aria-label="Começar diagnóstico estratégico">Quero meu diagnóstico estratégico</a>
+    </div>
+    <button class="menu-btn" aria-label="Abrir menu de navegação" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" aria-label="Menu mobile">
+  <a href="#problema" class="menu-link" aria-label="Ir para seção Problema">Problema</a>
+  <a href="#solucao" class="menu-link" aria-label="Ir para seção Solução">Solução</a>
+  <a href="#como-funciona" class="menu-link" aria-label="Ir para seção Como Funciona">Como Funciona</a>
+  <a href="#servicos" class="menu-link" aria-label="Ir para seção Serviços">Serviços</a>
+  <a href="#diagnostico" class="btn btn-y menu-link" style="width:auto; padding:0.75rem 2rem;" aria-label="Começar diagnóstico estratégico">Quero meu diagnóstico estratégico</a>
+</div>
+
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <h1 class="hero-title">Sistema de Marketing para Criadores e Empresas</h1>
+    <p class="hero-subtitle">Transforme conteúdo em clientes com um sistema de aquisição estruturado.</p>
+    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 2rem;">
+      <a href="#diagnostico" class="btn btn-y" id="hero-btn" aria-label="Começar diagnóstico estratégico agora">Quero meu diagnóstico estratégico <span class="btn-arrow">→</span></a>
+      <p class="trust-text">Diagnóstico gratuito • leva menos de 2 minutos</p>
+    </div>
+    <div class="stats reveal">
+      <div class="stat">
+        <h3>+<span class="counter" data-target="120">0</span></h3>
+        <p>empresas analisadas</p>
+      </div>
+      <div class="stat">
+        <h3>+<span class="counter" data-target="3.2" data-float="true">0</span>M</h3>
+        <p>visualizações geradas</p>
+      </div>
+      <div class="stat">
+        <h3>+<span class="counter" data-target="48">0</span></h3>
+        <p>sistemas implementados</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problema">
+  <div class="container">
+    <h2>Por que a maioria das empresas não cresce online</h2>
+    <div class="cards reveal">
+      <div class="card fade-in-up" id="card1">
+        <span class="icon-large">⚠️</span>
+        <h3>Conteúdo sem estratégia</h3>
+      </div>
+      <div class="card fade-in-up">
+        <span class="icon-large">📉</span>
+        <h3>Seguidores que não viram clientes</h3>
+      </div>
+      <div class="card fade-in-up">
+        <span class="icon-large">😓</span>
+        <h3>Muito esforço, pouco resultado</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hive" id="solucao">
+  <div class="container">
+    <h2>O Sistema BeeMedia</h2>
+    <p class="section-subtitle">Nossa metodologia comprovada para escalar negócios.</p>
+    <div class="hex-wrapper">
+      <div class="hex-grid" id="hive-center">
+        
+        <div class="hex-wrap fade-in-up reveal">
+          <div class="hex-inner">
+            <div class="hex-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <h3>Diagnóstico</h3>
+            <p>Analisamos seu conteúdo, funil e aquisição.</p>
+          </div>
+        </div>
+
+        <div class="hex-wrap fade-in-up reveal" style="transition-delay: 0.1s">
+          <div class="hex-inner">
+            <div class="hex-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            </div>
+            <h3>Arquitetura</h3>
+            <p>Criamos o sistema estratégico de crescimento.</p>
+          </div>
+        </div>
+
+        <div class="hex-wrap fade-in-up reveal" style="transition-delay: 0.2s">
+          <div class="hex-inner">
+            <div class="hex-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <h3>Automação</h3>
+            <p>Implementamos captura e nutrição de leads.</p>
+          </div>
+        </div>
+
+        <div class="hex-wrap fade-in-up reveal" style="transition-delay: 0.3s">
+          <div class="hex-inner">
+            <div class="hex-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+            </div>
+            <h3>Conversão</h3>
+            <p>Transformamos audiência em clientes.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" class="how-it-works">
+  <div class="container">
+    <h2>Como funciona o Sistema BeeMedia</h2>
+    <p class="section-subtitle">A maioria das empresas cria conteúdo.<br>Nós criamos sistemas.</p>
+    <div class="process-grid reveal">
+      <div class="process-step fade-in-up">
+        <div class="process-num">1</div>
+        <h3>Diagnóstico</h3>
+        <p>Analisamos o funil e conteúdo atual.</p>
+      </div>
+      <div class="process-step fade-in-up">
+        <div class="process-num">2</div>
+        <h3>Arquitetura</h3>
+        <p>Criamos o sistema de aquisição.</p>
+      </div>
+      <div class="process-step fade-in-up">
+        <div class="process-num">3</div>
+        <h3>Implementação</h3>
+        <p>Automação, conteúdo e funil funcionando.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicos" class="services">
+  <div class="container">
+    <h2>Serviços</h2>
+    <div class="cards reveal" id="services-list">
+      <div class="card fade-in-up">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+        </div>
+        <h3>Estratégia de Conteúdo</h3>
+        <p>Planejamento estratégico para redes sociais</p>
+      </div>
+      <div class="card fade-in-up">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </div>
+        <h3>Funil de Aquisição</h3>
+        <p>Transformar audiência em leads</p>
+      </div>
+      <div class="card fade-in-up">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        </div>
+        <h3>Automação de Marketing</h3>
+        <p>Fluxos automáticos de captação</p>
+      </div>
+      <div class="card fade-in-up">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M6 8h.01"/></svg>
+        </div>
+        <h3>Criação de Sites Estratégicos</h3>
+        <p>Sites feitos para gerar clientes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="diagnostico">
+  <div class="container">
+    <h2>Descubra o nível do seu marketing</h2>
+    <p class="section-subtitle">Responda 4 perguntas rápidas e receba um diagnóstico estratégico.</p>
+    
+    <p class="social-proof-text">+120 empresas já analisaram seu marketing com este diagnóstico.</p>
+    <div class="quiz reveal">
+      <form action="https://formspree.io/f/your-code" method="POST" id="diagnosis-form" aria-label="Formulário de diagnóstico estratégico">
+        
+        <div id="quiz-progress-container" class="quiz-header-progress">
+          <div class="quiz-progress-text" id="quiz-progress-text">Pergunta 1 de 4</div>
+          <div class="quiz-progress-track">
+            <div class="quiz-progress-fill" id="quiz-progress-fill" style="width: 20%;"></div>
+          </div>
+        </div>
+
+        <!-- Hidden inputs to store quiz answers -->
+        <input type="hidden" name="objetivo" id="ans-objetivo">
+        <input type="hidden" name="funil" id="ans-funil">
+        <input type="hidden" name="audiencia" id="ans-audiencia">
+        <input type="hidden" name="problema" id="ans-problema">
+
+        <!-- Step 1 -->
+        <div class="quiz-step active" id="step-1" role="group" aria-labelledby="q1-title">
+          <h3 id="q1-title">Hoje, qual é o principal resultado que você espera do seu marketing digital?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-opt" onclick="nextStep(2, 'objetivo', 'Atrair mais clientes qualificados')" aria-label="Opção: Atrair mais clientes qualificados">Atrair mais clientes qualificados</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(2, 'objetivo', 'Construir autoridade no meu mercado')" aria-label="Opção: Construir autoridade no meu mercado">Construir autoridade no meu mercado</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(2, 'objetivo', 'Aumentar vendas de serviços ou produtos')" aria-label="Opção: Aumentar vendas de serviços ou produtos">Aumentar vendas de serviços ou produtos</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(2, 'objetivo', 'Crescer audiência e posicionamento')" aria-label="Opção: Crescer audiência e posicionamento">Crescer audiência e posicionamento</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="quiz-step" id="step-2" role="group" aria-labelledby="q2-title">
+          <h3 id="q2-title">Hoje você possui algum processo estruturado para transformar visitantes ou seguidores em clientes?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-opt" onclick="nextStep(3, 'funil', 'Sim, já temos um funil estruturado')" aria-label="Opção: Sim, já temos um funil estruturado">Sim, já temos um funil estruturado</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(3, 'funil', 'Temos algumas etapas, mas nada organizado')" aria-label="Opção: Temos algumas etapas, mas nada organizado">Temos algumas etapas, mas nada organizado</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(3, 'funil', 'Não temos funil ainda')" aria-label="Opção: Não temos funil ainda">Não temos funil ainda</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(3, 'funil', 'Não tenho certeza de como funciona um funil')" aria-label="Opção: Não tenho certeza de como funciona um funil">Não tenho certeza de como funciona um funil</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="quiz-step" id="step-3" role="group" aria-labelledby="q3-title">
+          <h3 id="q3-title">Hoje aproximadamente quantas pessoas acompanham seu conteúdo ou marca online?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-opt" onclick="nextStep(4, 'audiencia', 'Ainda estou começando (até 1k)')" aria-label="Opção: Ainda estou começando (até 1k)">Ainda estou começando (até 1k)</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(4, 'audiencia', 'Pequena audiência (1k – 10k)')" aria-label="Opção: Pequena audiência (1k – 10k)">Pequena audiência (1k – 10k)</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(4, 'audiencia', 'Audiência em crescimento (10k – 50k)')" aria-label="Opção: Audiência em crescimento (10k – 50k)">Audiência em crescimento (10k – 50k)</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(4, 'audiencia', 'Audiência consolidada (50k+)')" aria-label="Opção: Audiência consolidada (50k+)">Audiência consolidada (50k+)</button>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="quiz-step" id="step-4" role="group" aria-labelledby="q4-title">
+          <h3 id="q4-title">Hoje qual desses problemas mais impede seu marketing de gerar clientes?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-opt" onclick="nextStep(5, 'problema', 'Não consigo atrair clientes de forma consistente')" aria-label="Opção: Não consigo atrair clientes de forma consistente">Não consigo atrair clientes de forma consistente</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(5, 'problema', 'Meu conteúdo gera alcance, mas não gera vendas')" aria-label="Opção: Meu conteúdo gera alcance, mas não gera vendas">Meu conteúdo gera alcance, mas não gera vendas</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(5, 'problema', 'Falta uma estratégia clara de crescimento')" aria-label="Opção: Falta uma estratégia clara de crescimento">Falta uma estratégia clara de crescimento</button>
+            <button type="button" class="quiz-opt" onclick="nextStep(5, 'problema', 'Não tenho estrutura de funil ou automação')" aria-label="Opção: Não tenho estrutura de funil ou automação">Não tenho estrutura de funil ou automação</button>
+          </div>
+        </div>
+
+        <!-- Step 5 (Form) -->
+        <div class="quiz-step quiz-result" id="step-5">
+          <h3 style="margin-bottom: 0.5rem;">Quase lá!</h3>
+          <p style="text-align: center; margin-bottom: 1.5rem; color: var(--text);">Para receber seu diagnóstico estratégico completo, informe seus dados abaixo.</p>
+          <div class="q-group">
+            <label>Nome</label>
+            <input type="text" name="nome" required>
+          </div>
+          <div class="q-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+          </div>
+          <button type="submit" class="btn btn-y btn-submit" id="submit-btn">Ver meu diagnóstico</button>
+          <p class="privacy-text">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Seus dados são usados apenas para enviar o diagnóstico.
+          </p>
+        </div>
+
+        <!-- Loading Step -->
+        <div class="quiz-step quiz-loading" id="step-loading">
+          <h3>Analisando seu sistema...</h3>
+          <p>Estamos processando suas respostas.</p>
+          <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+          <p class="progress-text">Seu diagnóstico está <span id="progress-value">0</span>% pronto</p>
+        </div>
+
+        <!-- Result Step (Shown after submit simulation) -->
+        <div class="quiz-step quiz-result" id="step-result">
+          <h3>Diagnóstico inicial do seu sistema</h3>
+          <p>Com base nas suas respostas, seu marketing provavelmente já possui alguns elementos de presença digital, mas ainda apresenta gargalos na estrutura de aquisição e conversão.</p>
+          <p style="margin-bottom: 1.5rem;">Isso significa que seu conteúdo pode gerar alcance, mas ainda não está estruturado como um sistema previsível de geração de clientes.</p>
+          <p style="text-align: center; font-size: 0.85rem; color: #888; margin-bottom: 0.5rem;">Sem spam • Sem compromisso • Diagnóstico gratuito</p>
+          <a href="https://wa.me/5512982368405?text=Olá%20acabei%20de%20fazer%20o%20diagnóstico%20no%20site%20da%20BeeMedia%20e%20quero%20receber%20meu%20diagnóstico%20estratégico%20completo." target="_blank" class="btn btn-y btn-submit btn-glow">Receber diagnóstico completo no WhatsApp</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="authority">
+  <div class="container">
+    <div class="auth-grid">
+      <div class="auth-item">
+        <span class="auth-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+        <h4>Estratégia antes de conteúdo</h4>
+      </div>
+      <div class="auth-item">
+        <span class="auth-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+        <h4>Sistemas replicáveis</h4>
+      </div>
+      <div class="auth-item">
+        <span class="auth-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></span>
+        <h4>Foco em aquisição de clientes</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>Seu marketing tem estratégia ou só conteúdo?</h2>
+    <a href="#diagnostico" class="btn btn-d" id="final-btn" aria-label="Começar diagnóstico estratégico agora">Quero meu diagnóstico estratégico</a>
+  </div>
+</section>
+
+<a href="#diagnostico" class="btn btn-y float-btn" aria-label="Fazer diagnóstico gratuito flutuante">🐝 Fazer diagnóstico gratuito</a>
+
+<script>
+// Quiz Logic
+function nextStep(step, fieldId, value) {
+  if (fieldId && value) {
+    document.getElementById('ans-' + fieldId).value = value;
+  }
+  document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step-' + step).classList.add('active');
+  
+  // Update Progress Bar
+  const progressContainer = document.getElementById('quiz-progress-container');
+  if (step <= 5) {
+    const progressPercent = step * 20;
+    const progressText = step === 5 ? "Etapa Final" : `Pergunta ${step} de 4`;
+    document.getElementById('quiz-progress-text').textContent = progressText;
+    document.getElementById('quiz-progress-fill').style.width = `${progressPercent}%`;
+  } else {
+    if (progressContainer) progressContainer.style.display = 'none';
+  }
+  
+  // Smooth scroll to top of quiz
+  const quizElement = document.querySelector('.quiz');
+  if (quizElement) {
+    const yOffset = -80; // offset for fixed header
+    const y = quizElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({top: y, behavior: 'smooth'});
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Mobile Menu
+  const menuBtn = document.querySelector('.menu-btn');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const menuLinks = document.querySelectorAll('.menu-link');
+
+  function toggleMenu() {
+    const isOpen = menuBtn.classList.contains('open');
+    menuBtn.classList.toggle('open');
+    mobileMenu.classList.toggle('active');
+    menuBtn.setAttribute('aria-expanded', !isOpen);
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  }
+
+  menuBtn.addEventListener('click', toggleMenu);
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if(mobileMenu.classList.contains('active')) toggleMenu();
+    });
+  });
+
+  // Form Submit Simulation
+  const form = document.getElementById('diagnosis-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Hide all steps and show loading
+    document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+    document.getElementById('step-loading').classList.add('active');
+
+    // Animate progress bar
+    const progressBar = document.getElementById('progress-bar');
+    const progressValue = document.getElementById('progress-value');
+    let progress = 0;
+    const targetProgress = 87;
+    const duration = 2500; // 2.5 seconds
+    const intervalTime = 30;
+    const step = (targetProgress / (duration / intervalTime));
+
+    const loadingMsg = document.querySelector('#step-loading h3');
+    const progressInterval = setInterval(() => {
+      progress += step;
+      
+      // Update dynamic messages
+      if (progress < 25) {
+        loadingMsg.textContent = "Analisando estrutura de conteúdo...";
+      } else if (progress < 50) {
+        loadingMsg.textContent = "Comparando com empresas similares...";
+      } else if (progress < 75) {
+        loadingMsg.textContent = "Identificando gargalos de conversão...";
+      } else {
+        loadingMsg.textContent = "Gerando diagnóstico estratégico...";
+      }
+
+      if (progress >= targetProgress) {
+        progress = targetProgress;
+        clearInterval(progressInterval);
+        
+        // Wait a brief moment at 87% then show result
+        setTimeout(() => {
+          document.getElementById('step-loading').classList.remove('active');
+          document.getElementById('step-result').classList.add('active');
+        }, 500);
+      }
+      progressBar.style.width = `${progress}%`;
+      progressValue.textContent = Math.floor(progress);
+    }, intervalTime);
+  });
+
+  // Scroll Animations & Floating Button
+  const floatBtn = document.querySelector('.float-btn');
+  const heroBg = document.querySelector('.hero-bg');
+  const diagnosticoSection = document.getElementById('diagnostico');
+  let isDiagnosticoInView = false;
+
+  const diagObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isDiagnosticoInView = entry.isIntersecting;
+      updateFloatBtnVisibility();
+    });
+  }, { threshold: 0.1 });
+
+  if (diagnosticoSection) {
+    diagObserver.observe(diagnosticoSection);
+  }
+
+  function updateFloatBtnVisibility() {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    if (scrollPercent > 40 && !isDiagnosticoInView) {
+      floatBtn.classList.add('show');
+    } else {
+      floatBtn.classList.remove('show');
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    updateFloatBtnVisibility();
+    
+    // Hero background parallax
+    if (window.scrollY < window.innerHeight) {
+      heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+    }
+  });
+
+  // Intersection Observer for fade-ins and counters
+  // Reveal Animation on Scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        
+        // Animated Counters
+        if (entry.target.classList.contains('counter') && !entry.target.dataset.counted) {
+          entry.target.dataset.counted = 'true';
+          const target = parseFloat(entry.target.dataset.target);
+          const isFloat = entry.target.dataset.float === 'true';
+          const duration = 2000;
+          const start = performance.now();
+          
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function (easeOutExpo)
+            const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            
+            const currentVal = easeProgress * target;
+            
+            if (isFloat) {
+              entry.target.textContent = currentVal.toFixed(1);
+            } else {
+              entry.target.textContent = Math.floor(currentVal);
+            }
+            
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              entry.target.textContent = isFloat ? target.toFixed(1) : target;
+            }
+          }
+          
+          requestAnimationFrame(updateCounter);
+        }
+      }
+    });
+  }, { threshold: 0.05 }); // Lower threshold for better triggering
+
+  document.querySelectorAll('.fade-in-up, .counter').forEach(el => observer.observe(el));
+  
+  // Trigger counters if already in view
+  setTimeout(() => {
+    document.querySelectorAll('.counter').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+        // Force trigger if needed, but observer should handle it
+      }
+    });
+  }, 500);
+});
+</script>
+</body>
+</html>
